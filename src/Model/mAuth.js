@@ -201,7 +201,7 @@ const authModel = {
                 role: dataUser.role,
               },
               process.env.SECRET_KEY,
-              { expiresIn: "2 h" }
+              { expiresIn: "1 days" }
             );
             bcrypt.compare(body.password, dataUser.password, (err, result) => {
               if (err) {
