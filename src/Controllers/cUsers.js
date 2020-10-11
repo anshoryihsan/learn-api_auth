@@ -1,5 +1,4 @@
 const userModel = require("../Model/mUsers");
-// const res = require('../Helpers/FormResponse');
 const formResponse = require("../Helpers/FormResponse");
 
 module.exports = {
@@ -11,11 +10,6 @@ module.exports = {
   },
   getAllUserById: (req, res) => {
     try {
-      // const role = req.data.role;
-      // if (role !== "admin") {
-      //   return res.sendStatus(403);
-      // }
-      // const id = req.params.id;
       userModel
         .getAllUserById(req.params.id)
         .then((data) => formResponse(data, res, 200))
@@ -42,7 +36,6 @@ module.exports = {
       });
   },
   updateUser: (req, res) => {
-    // console.log(req.params);
     userModel
       .updateUser(req.params, req.body)
       .then((data) => {
