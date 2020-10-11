@@ -187,6 +187,7 @@ const authModel = {
       const { email, password } = body;
       const query = "SELECT * FROM user WHERE email=?";
       db.query(query, email, (err, data) => {
+        // console.log(data);
         let dataUser = data[0];
         if (!data.length) {
           reject("Email Salah.");
@@ -197,8 +198,10 @@ const authModel = {
                 email: dataUser.email,
                 id: dataUser.id,
                 name: dataUser.name,
+                role: dataUser.role,
               },
-              process.env.SECRET_KEY
+              process.env.SECRET_KEY,
+              { expiresIn: "2 h" }
             );
             bcrypt.compare(body.password, dataUser.password, (err, result) => {
               if (err) {
