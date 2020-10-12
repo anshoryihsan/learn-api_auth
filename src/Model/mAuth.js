@@ -47,7 +47,7 @@ const authModel = {
                 reject("your password is incorect");
               } else {
                 if (!result) {
-                  reject("your password is incorect");
+                  reject("your password is incorsssect");
                 } else {
                   const sql = "SELECT * FROM user WHERE password=?";
                   db.query(sql, dataUser.password, (err, data) => {

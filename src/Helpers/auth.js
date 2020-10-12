@@ -1,5 +1,5 @@
 require("dotenv/config");
-const response = require("../Helpers/res");
+const response = require("./res");
 
 jwt = require("jsonwebtoken");
 

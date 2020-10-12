@@ -1,8 +1,4 @@
 const db = require("../Helpers/db");
-const formResponse = require("../Helpers/res");
-exports.index = function (req, res) {
-  response.ok("res-api aplication running", res);
-};
 const bcrypt = require("bcrypt");
 
 const userModel = {
