@@ -29,7 +29,7 @@ const authModel = {
         // console.log(data);
         let dataUser = data[0];
         if (!data.length) {
-          reject("Email Salah.");
+          reject("Email Not Found.");
         } else {
           if (!err) {
             const token = jwt.sign(
@@ -44,17 +44,17 @@ const authModel = {
             );
             bcrypt.compare(body.password, dataUser.password, (err, result) => {
               if (err) {
-                reject("password Salahaa");
+                reject("your password is incorect");
               } else {
                 if (!result) {
-                  reject("Password Salah");
+                  reject("your password is incorect");
                 } else {
                   const sql = "SELECT * FROM user WHERE password=?";
                   db.query(sql, dataUser.password, (err, data) => {
                     if (!err) {
                       resolve(token);
                     } else {
-                      reject("Password Salah");
+                      reject("your password is incorect");
                     }
                   });
                 }

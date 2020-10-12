@@ -1,4 +1,8 @@
 const db = require("../Helpers/db");
+const formResponse = require("../Helpers/res");
+exports.index = function (req, res) {
+  response.ok("res-api aplication running", res);
+};
 const bcrypt = require("bcrypt");
 
 const userModel = {
@@ -8,7 +12,7 @@ const userModel = {
         if (!err) {
           resolve(res);
         }
-        console.log(err);
+        reject(new Error(err));
       });
     });
   },
@@ -18,8 +22,9 @@ const userModel = {
       db.query(sql, id, (err, res) => {
         if (!err) {
           resolve(res);
+        } else {
+          reject(err);
         }
-        console.log(err);
       });
     });
   },

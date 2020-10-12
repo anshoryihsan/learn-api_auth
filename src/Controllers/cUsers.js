@@ -1,71 +1,35 @@
 const userModel = require("../Model/mUsers");
-const formResponse = require("../Helpers/FormResponse");
+const response = require("../Helpers/res");
 
 module.exports = {
   getAllUser: (req, res) => {
     userModel
       .getAllUsers()
-      .then((data) => formResponse(data, res, 200))
-      .catch((err) => console.log(err));
+      .then((data) => response.success(data, res))
+      .catch((err) => response.failed(err, res));
   },
   getAllUserById: (req, res) => {
-    try {
-      userModel
-        .getAllUserById(req.params.id)
-        .then((data) => formResponse(data, res, 200))
-        .catch((err) => console.log(err));
-    } catch (err) {
-      console.log(res, [], err);
-    }
+    userModel
+      .getAllUserById(req.params.id)
+      .then((data) => response.success(data, res))
+      .catch((err) => response.failed(err, res));
   },
   setUser: (req, res) => {
     userModel
       .setUser(req.body)
-      .then((data) => {
-        res.status(200).send({
-          Success: true,
-          message: "Register Successfully",
-          data: data,
-        });
-      })
-      .catch((err) => {
-        res.send({
-          success: false,
-          message: err.message,
-        });
-      });
+      .then((data) => response.success(data, res, "Insert Successfull"))
+      .catch((err) => response.failed(err, res));
   },
   updateUser: (req, res) => {
     userModel
       .updateUser(req.params, req.body)
-      .then((data) => {
-        res.status(200).send({
-          Success: true,
-          message: "Register Successfully",
-          data: data,
-        });
-      })
-      .catch((err) => {
-        res.send({
-          success: false,
-          message: err.message,
-        });
-      });
+      .then((data) => response.success(data, res, "Update Successfull"))
+      .catch((err) => response.failed(err, res));
   },
   deleteUser: (req, res) => {
     userModel
       .deleteUser(req.params)
-      .then((data) => {
-        res.status(200).send({
-          Success: true,
-          message: "Register Successfully",
-        });
-      })
-      .catch((err) => {
-        res.send({
-          success: false,
-          message: err.message,
-        });
-      });
+      .then((data) => response.success(data, res, "Delete Successfull"))
+      .catch((err) => response.failed(err, res));
   },
 };
